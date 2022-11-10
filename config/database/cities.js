@@ -1,4 +1,4 @@
-let city = [
+let cities = [
   {
   
     "name": "Paris",
