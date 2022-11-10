@@ -1,4 +1,4 @@
-let admins = [
+let users = [
     {
       "name": "Eric",
       "lastName": "Rodriguez",
@@ -53,7 +53,7 @@ let admins = [
   require('../database')
 const User = require('../../models/User')
 
-  admins.forEach(elemento =>{
+  users.forEach(elemento =>{
     User.create({
         name: elemento.name,
         lastName: elemento.lastName,

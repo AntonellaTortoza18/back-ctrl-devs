@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
+// requiero el metodo de entutamiento del modulo express. 
+let router = require("express").Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+// requiero las rutas de cada modelo a controlar.
+let user = require("./user")
+// ubi de las rutas de curso.
+
+// le obligo al enrutador principal que use la palabra user para poder controlar las rutas de user.
+router.use('/api/users', user)
 
 module.exports = router;
