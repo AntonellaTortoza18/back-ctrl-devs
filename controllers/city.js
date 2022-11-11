@@ -71,5 +71,28 @@ const controller = {
       });
     }
   },
+  update: async(req, res) =>{
+    let {id} = req.params
+    try{
+     let city = await City.findOneAndUpdate({_id: id}, req.body, {new: true})
+      if(city){
+        res.status(200).json({
+          id: city._id,
+          success: true,
+          message : "The city was successfully modified"
+        })
+      }else{
+        res.status(404).json({
+          success: false,
+          message: "The city was not found"
+        })
+      }
+    }catch(error){
+      res.status(400).json({
+        success: false,
+        message: error.message
+      })
+    }
+  }
 };
 module.exports = controller;
