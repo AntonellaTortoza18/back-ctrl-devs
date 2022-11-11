@@ -6,7 +6,7 @@ const schema = new mongoose.Schema({
     zone: {type:String, requiered:true},
     photo: {type:String,requiered:true},
     population: {type:Number,requiered:true},
-    userId: {type: mongoose.Types.ObjetId, ref:"users", requiered:true}
+    userId: {type: mongoose.Types.ObjectId, ref:"users", requiered:true},
 
 });
 
