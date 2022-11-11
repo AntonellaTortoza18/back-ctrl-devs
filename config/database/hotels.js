@@ -7,18 +7,18 @@ let hotels = [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa66mX6q2ywmk9C9TW9IOTizMG3ItwYighuQ&usqp=CAU"
         ],
         "capacity": 3000,
-        "cityId": "636d975f45f1e59ed7a377b6",
+        "cityId": "636d975f45f1e59ed7a377b4",
         "userId": "636d82abcedcaf6f80f42e6f"
     },
     {
-        "name": "Palazzo Manfredi",
+        "name":"Palazzo Manfredi",
         "photo": [
             "https://cf.bstatic.com/xdata/images/hotel/max1024x768/210106720.jpg?k=694833d09157f72e0d3421212700c40a247d4d5844bcb3ec050d910bc941d061&o=&hp=1",
             "https://www.manfredihotels.com/wp-content/uploads/2020/03/Aroma_Restaurant-Terrace_2-scaled.jpg",
             "https://www.fim-umbrellas.com/wp-content/uploads/2020/06/THE-COURT-PALAZZO-MANFREDI-Roma-%EF%80%A2-Italy-02.jpg"
         ],
         "capacity": 2000,
-        "cityId": "636d975f45f1e59ed7a377b7",
+        "cityId": "636d975f45f1e59ed7a377b5",
         "userId": "636d82abcedcaf6f80f42e70"
     },
     {
@@ -29,7 +29,7 @@ let hotels = [
             "https://www.jet2holidays.com/HotelImages/Web/PRG_72219_Ibis_Praha_Wenceslas_Square_1119_03.jpg"
         ],
         "capacity": 3000,
-        "cityId": "636d975f45f1e59ed7a377b8",
+        "cityId": "636d975f45f1e59ed7a377b6",
         "userId": "636d82abcedcaf6f80f42e71"
     },
     {
@@ -40,7 +40,7 @@ let hotels = [
             "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_360,q_auto,w_360/itemimages/22/83/2283242_v13.jpeg"
         ],
         "capacity": 2500,
-        "cityId": "636d975f45f1e59ed7a377b9",
+        "cityId": "636d975f45f1e59ed7a377b7",
         "userId": "636d82abcedcaf6f80f42e72"
     },
     {
@@ -51,7 +51,7 @@ let hotels = [
             "https://a.cdn-hotels.com/gdcs/production4/d1633/a0d3e851-3acc-4002-8ea1-9755d6e39e71.jpg"
         ],
         "capacity": 1340,
-        "cityId": "636d975f45f1e59ed7a377b5",
+        "cityId": "636d975f45f1e59ed7a377b8",
         "userId": "636d82abcedcaf6f80f42e72"
     },
     {
@@ -62,7 +62,7 @@ let hotels = [
             "https://media-cdn.tripadvisor.com/media/photo-m/1280/1d/cb/37/6b/caption.jpg"
         ],
         "capacity": 3500,
-        "cityId": "636d975f45f1e59ed7a377bb",
+        "cityId": "636d975f45f1e59ed7a377b9",
         "userId": "636d82abcedcaf6f80f42e70"
     },
     {
@@ -73,7 +73,7 @@ let hotels = [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwvJGL1kZsy2mmVfuExduFeO3J3otFszcsZhU7sg3Yr0Y6Tg-tx4Fz7BTYy9KlAk3wsxc&usqp=CAU"
         ],
         "capacity": 32115,
-        "cityId": "636d975f45f1e59ed7a377b4",
+        "cityId": "636d975f45f1e59ed7a377ba",
         "userId": "636d82abcedcaf6f80f42e71"
     },
     {
@@ -84,7 +84,7 @@ let hotels = [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT4OmV2c92KB5FgJvHVpTYmndUOlEZSnwMtA&usqp=CAU"
         ],
         "capacity": 4000,
-        "cityId": "636d975f45f1e59ed7a377bd",
+        "cityId": "636d975f45f1e59ed7a377bb",
         "userId": "636d82abcedcaf6f80f42e72"
     },
     {
@@ -95,7 +95,7 @@ let hotels = [
             "https://goingluxury.com/wp-content/uploads/2016/04/image21.jpg"
         ],
         " capacity": 1800,
-        "cityId": "636d975f45f1e59ed7a377be",
+        "cityId": "636d975f45f1e59ed7a377bc",
         "userId": "636d82abcedcaf6f80f42e6f"
     },
     {
@@ -106,7 +106,7 @@ let hotels = [
             "https://ev6ebnbizf5.exactdn.com/wp-content/uploads/Alfombra-de-flores-2-01.jpg"
         ],
         "capacity": 80000,
-        "cityId": "636d975f45f1e59ed7a377bf",
+        "cityId": "636d975f45f1e59ed7a377bd",
         "userId": "636d82abcedcaf6f80f42e70"
     },
     {
@@ -117,7 +117,7 @@ let hotels = [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQciaw57ZD1oEWNwl73mhVpkUimrxLTtzhpvQ&usqp=CAU"
         ],
         "capacity": 60000,
-        "cityId": "636d975f45f1e59ed7a377ba",
+        "cityId": "636d975f45f1e59ed7a377be",
         "userId": "636d82abcedcaf6f80f42e6f"
     },
     {
@@ -128,7 +128,7 @@ let hotels = [
             "https://w0.peakpx.com/wallpaper/733/286/HD-wallpaper-wanda-metropolitano-red-stands-view-inside-spanish-football-stadium-football-field-atletico-madrid-stadium-la-liga-madrid-spain-estadio-metropolitano.jpg"
         ],
         "capacity": 68000,
-        "cityId": "636d975f45f1e59ed7a377bc",
+        "cityId": "636d975f45f1e59ed7a377bf",
         "userId": "636d82abcedcaf6f80f42e71"
     }
 ]
