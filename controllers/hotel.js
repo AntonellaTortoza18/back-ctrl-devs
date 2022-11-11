@@ -106,5 +106,30 @@ const controller = {
       });
     }
   },
+  destroy: async (req, res) => {
+    let {id} = req.params
+    try {
+      let hotel = await Hotel.findOneAndDelete({_id:id})
+      if(hotel){
+        res.status(200).json({
+          res: hotel,
+          success:true,
+          message: "The hotel was successfully deleted"
+        })
+       
+      }else{
+        res.status(404).json({
+          res: hotel,
+          success:false,
+          message: "The hotel was not found"
+        })
+      }
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  },
 };
 module.exports = controller;
