@@ -29,7 +29,7 @@ let hotels = [
             "https://www.jet2holidays.com/HotelImages/Web/PRG_72219_Ibis_Praha_Wenceslas_Square_1119_03.jpg"
         ],
         "capacity": 3000,
-        "cityId": "636d975f45f1e59ed7a377b6",
+        "cityId": "636ea794accb6410bd0e00fb",
         "userId": "636d82abcedcaf6f80f42e71"
     },
     {
