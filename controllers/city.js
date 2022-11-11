@@ -17,33 +17,30 @@ const controller = {
     }
   },
   read: async (req, res) => {
-   let query = {}
-   if(req.query.zone){
-    query ={zone: req.query.zone} 
-   }
-   if(req.query.name){
-    query = {
-      ...query,
-      name: { $regex: req.query.name, $options: 'i' },
+    let query = {};
+    if (req.query.zone) {
+      query = { zone: req.query.zone };
     }
-   }
+    if (req.query.name) {
+      query = {
+        ...query,
+        name: { $regex: req.query.name, $options: "i" },
+      };
+    }
     try {
-     
-      let all_cities = await City.find(query) 
-      if(all_cities){
+      let all_cities = await City.find(query);
+      if (all_cities) {
         res.status(200).json({
           success: true,
           message: "the cities were successfully found",
           response: all_cities,
-        })
-      } else{
+        });
+      } else {
         res.status(404).json({
           success: false,
           message: "there are no cities",
-        
-        })
+        });
       }
-       
     } catch (error) {
       res.status(400).json({
         success: false,
@@ -51,5 +48,28 @@ const controller = {
       });
     }
   },
-}
+  readOne: async (req, res) => {
+    let id = req.params.id;
+    try {
+      let city = await City.findOne({ _id: id }).populate({ path: 'userId', select: 'name photo -_id' });
+      if (city) {
+        res.status(200).json({
+          success: true,
+          message: "the cities were successfully found",
+          response: city
+        });
+      } else {
+        res.status(404).json({
+          success: false,
+          message: "there are no cities",
+        });
+      }
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  },
+};
 module.exports = controller;
