@@ -1,0 +1,33 @@
+const Show = require("../models/Show.js");
+
+const controller = {
+    read: async (req, res) => {
+        let query = {};
+        if (req.query.hotelId) {
+          query = {
+             hotelId: req.query.hotelId 
+            };
+        }
+        try {
+          let show = await Show.find(query);
+          if (show) {
+            res.status(200).json({
+              success: true,
+              message: "The show was successfully found",
+              response: show,
+            });
+          } else {
+            res.status(404).json({
+              success: false,
+              message: "there is no show",
+            });
+          }
+        } catch (error) {
+          res.status(400).json({
+            success: false,
+            message: error.message,
+          });
+        }
+      },
+    };
+module.exports = controller;

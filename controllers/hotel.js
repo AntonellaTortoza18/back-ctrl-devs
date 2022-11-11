@@ -16,34 +16,36 @@ const controller = {
       });
     }
   },
-  
-  update: async(req, res) =>{
-    let {id} = req.params
-    try{
-     let one = await Hotel.findOneAndUpdate({_id: id}, req.body, {new: true})
-      if(one){
+
+  update: async (req, res) => {
+    let { id } = req.params;
+    try {
+      let one = await Hotel.findOneAndUpdate({ _id: id }, req.body, {
+        new: true,
+      });
+      if (one) {
         res.status(200).json({
           id: one._id,
           success: true,
-          message : "The hotel was successfully modified"
-        })
-      }else{
+          message: "The hotel was successfully modified",
+        });
+      } else {
         res.status(404).json({
           success: false,
-          message: "The hotel was not found"
-        })
+          message: "The hotel was not found",
+        });
       }
-    }catch(error){
+    } catch (error) {
       res.status(400).json({
         success: false,
-        message: error.message
-      })
+        message: error.message,
+      });
     }
-  }
+  },
   read: async (req, res) => {
     let query = {};
-    let order = {}
-    
+    let order = {};
+
     if (req.query.name) {
       query = {
         ...query,
@@ -51,14 +53,14 @@ const controller = {
       };
     }
 
-   if(req.query.order){
-    order = {
-      name : req.query.order
+    if (req.query.order) {
+      order = {
+        name: req.query.order,
+      };
     }
-   }
 
     try {
-      let all_hotels = await Hotel.find(query).sort(order)
+      let all_hotels = await Hotel.find(query).sort(order);
       if (all_hotels) {
         res.status(200).json({
           success: true,
@@ -78,6 +80,31 @@ const controller = {
       });
     }
   },
+  getHotel: async (req, res) => {
+    let id = req.params.id;
+    try {
+      let hotel = await Hotel.find({ _id: id }).populate({
+        path: "userId",
+        select: "name photo -_id",
+      });
+      if (hotel) {
+        res.status(200).json({
+          success: true,
+          message: "The hotel were successfully found",
+          response: hotel,
+        });
+      } else {
+        res.status(404).json({
+          success: false,
+          message: "there are no Hotels",
+        });
+      }
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  },
 };
 module.exports = controller;
-
