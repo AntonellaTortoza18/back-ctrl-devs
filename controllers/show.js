@@ -44,5 +44,28 @@ const controller = {
       });
     }
   },
+  update: async(req, res) =>{
+    let {id} = req.params
+    try{
+     let show = await Show.findOneAndUpdate({_id: id}, req.body, {new: true})
+      if(show){
+        res.status(200).json({
+          id: show._id,
+          success: true,
+          message : "The show was successfully modified"
+        })
+      }else{
+        res.status(404).json({
+          success: false,
+          message: "The show was not found"
+        })
+      }
+    }catch(error){
+      res.status(400).json({
+        success: false,
+        message: error.message
+      })
+    }
+  },
 };
 module.exports = controller;
