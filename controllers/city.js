@@ -55,13 +55,13 @@ const controller = {
       if (city) {
         res.status(200).json({
           success: true,
-          message: "the cities were successfully found",
+          message: "the city was successfully found",
           response: city
         });
       } else {
         res.status(404).json({
           success: false,
-          message: "there are no cities",
+          message: "there is no city",
         });
       }
     } catch (error) {
@@ -107,7 +107,6 @@ const controller = {
        
       }else{
         res.status(404).json({
-          res: city,
           success:false,
           message: "The city was not found"
         })
