@@ -9,5 +9,6 @@ router.get("/",read)
 router.get("/:id", getHotel)
 router.delete("/:id", destroy)
 
+
 module.exports = router;
 

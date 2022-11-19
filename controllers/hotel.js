@@ -45,6 +45,9 @@ const controller = {
   read: async (req, res) => {
     let query = {};
     let order = {};
+    if(req.query.userId){
+      query ={userId: req.query.userId}
+    }
 
     if (req.query.name) {
       query = {
@@ -60,7 +63,10 @@ const controller = {
     }
 
     try {
-      let all_hotels = await Hotel.find(query).sort(order);
+      let all_hotels = await Hotel.find(query).sort(order).populate({
+        path: "userId",
+        select: "role -_id",
+      });
       if (all_hotels) {
         res.status(200).json({
           success: true,
@@ -131,5 +137,6 @@ const controller = {
       });
     }
   },
+  
 };
 module.exports = controller;
