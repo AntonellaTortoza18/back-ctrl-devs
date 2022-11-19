@@ -29,6 +29,7 @@ const controller = {
         ...query,
         name: { $regex: req.query.name, $options: "i" },
       };
+      
     }
     
     try {
