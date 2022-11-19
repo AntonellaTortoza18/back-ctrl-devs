@@ -94,13 +94,13 @@ const controller = {
           response: hotel,
         });
       } else {
-        res.status(404).json({
+        res.status(400).json({
           success: false,
           message: "there are no Hotels",
         });
       }
     } catch (error) {
-      res.status(400).json({
+      res.status(404).json({
         success: false,
         message: error.message,
       });
