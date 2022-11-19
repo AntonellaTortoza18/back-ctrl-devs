@@ -8,13 +8,13 @@ const request = require("supertest");
 // it test cases
 
 describe("GET /api/cities", function () {
-  it("deberia traerme un array", function (done) {
+  it("it should get me an array of objects", function (done) {
     request(app)
       .get("/api/cities")
       .expect((response) => {
         assert.isArray(response.body.response);
         response.body.response.forEach((element) => {
-          assert.typeOf(element, "object");
+          assert.isObject(element);
         });
       })
       .end(function (err, res) {
