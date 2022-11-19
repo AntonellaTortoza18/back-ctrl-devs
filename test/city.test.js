@@ -25,3 +25,32 @@ describe("GET /api/cities", function () {
       });
   });
 });
+describe("POST /api/cities", function () {
+  it("it should be an string", function (done) {
+    request(app)
+      .post("/api/cities")
+      .expect((response) => {
+        assert.isString(response.name);
+      })
+      .end(function (err, res) {
+        if (err) {
+          return done(err);
+        }
+        done();
+      });
+  });
+  it("status 400"),
+    function (done) {
+      request(app)
+        .post("/api/cities")
+        .expect((response) => {
+          assert.isString(response.name);
+        })
+        .end(function (err, res) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    };
+});
