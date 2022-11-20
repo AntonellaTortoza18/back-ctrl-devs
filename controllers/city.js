@@ -33,7 +33,7 @@ const controller = {
     }
     
     try {
-      let all_cities = await City.find(query).populate({path:"userId", select: "role -_id"})
+      let all_cities = await City.find(query)
       if (all_cities) {
         res.status(200).json({
           success: true,

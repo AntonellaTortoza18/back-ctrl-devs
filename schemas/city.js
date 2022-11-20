@@ -8,11 +8,11 @@ const schema = joi.object({
     "string.min":"min three characters",
     "string.max":"max twenty characters"
   }),
-  zone: joi.string().required().min(3).max(6).messages({
+  zone: joi.string().required().min(3).max(15).messages({
     "any.required": "complete this input, please",
     "string.empty": "complete the zone of city, please",
     "string.min":"min three characters",
-    "string.max":"max six characters"
+    "string.max":"max fifteen characters"
   }),
   photo: joi.string().required().uri().messages({
     "any.required": "complete this input, please",
