@@ -3,6 +3,9 @@ const Itinerary = require("../models/Itinerary");
 const controller = {
   read: async (req, res) => {
     let query = {};
+    if (req.query.userId) {
+      query = { userId: req.query.userId };
+    }
     if (req.query.cityId) {
       query = {
         cityId: req.query.cityId,
