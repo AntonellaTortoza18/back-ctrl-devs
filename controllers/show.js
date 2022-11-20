@@ -3,6 +3,10 @@ const Show = require("../models/Show.js");
 const controller = {
   read: async (req, res) => {
     let query = {};
+    if(req.query.userId){
+      query ={userId: req.query.userId}
+    }
+
     if (req.query.hotelId) {
       query = {
         hotelId: req.query.hotelId,
@@ -10,6 +14,7 @@ const controller = {
     }
     try {
       let show = await Show.find(query);
+      
       if (show) {
         res.status(200).json({
           success: true,
