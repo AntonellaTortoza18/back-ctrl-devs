@@ -7,7 +7,7 @@ const validator = (schema) =>[
         //abortEarly valida todos los campos juntos y nos devuelve el array con todos los errores de validación.
         //validate devuelve un objeto con propiedades, algunas de ellas tiene un array con todos los errores. El objeto que esta en data tiene una propiedad error con todos los detalles de validacion.
         if(data.error){
-            return res.status(200).json({
+            return res.status(400).json({
                 success: false,
                 message: data.error.details.map(error =>error.message),
                 // en details esta el array con todos los errores.

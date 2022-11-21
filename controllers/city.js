@@ -5,7 +5,7 @@ const controller = {
     try {
       let new_city = await City.create(req.body);
       res.status(201).json({
-        id: new_city._id,
+        response: new_city,
         success: true,
         message: "the city was successfully created",
       });
