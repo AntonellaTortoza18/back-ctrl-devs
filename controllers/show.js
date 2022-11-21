@@ -97,6 +97,7 @@ const controller = {
       });
     }
   },
+
   readOne: async (req, res) => {
     let id = req.params.id;
     try {
@@ -104,6 +105,12 @@ const controller = {
         path: "userId",
         select: "name photo -_id",
       });
+
+  getShow: async (req, res) => {
+    let id = req.params.id;
+    try {
+      let show = await Show.findOne({ _id: id })
+
       if (show) {
         res.status(200).json({
           success: true,
