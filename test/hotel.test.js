@@ -46,28 +46,24 @@ describe("POST /hotels", function () {
         return done();
       });
   });
-});
-describe("POST/hotels", function () {
-  it("should be status 201", function (done) {
+  it(`The  hotel has been created`, function (done) {
     request(app)
-      .post("/api/hotels")
-      .send({
-        name: "hotel manantiales",
-        photo:[
-          "https://media-cdn.tripadvisor.com/media/photo-s/25/04/93/1e/blossom-hotel-houston.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/25/04/93/1e/blossom-hotel-houston.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/25/04/93/1e/blossom-hotel-houston.jpg"],
-        capacity: 450,
-        cityId: "636d975f45f1e59ed7a377b7",
-        userId: "636d82abcedcaf6f80f42e72",
-      })
-      .expect(res => {
-        let response = res.status;
-        assert.strictEqual(response, 201);
-      })
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        return done();
-      });
-  });
+    .post(`/api/hotels/`)
+    .send({
+        "name": "HOTEL PRUEBA",
+        "photo": [
+            "https://www.barcelo.com/guia-turismo/wp-content/uploads/2021/12/fin-de-semana-madrid-pal-3.jpg", "https://www.barcelo.com/guia-turismo/wp-content/uploads/2021/12/fin-de-semana-madrid-pal-3.jpg", "https://www.barcelo.com/guia-turismo/wp-content/uploads/2021/12/fin-de-semana-madrid-pal-3.jpg"
+        ],
+        "capacity": 35435,
+        "cityId": "636d975f45f1e59ed7a377b7",
+        "userId": "636d82abcedcaf6f80f42e72"
+    })
+    .expect(201)
+    .end(function (err) {
+        if (err) return done(err);
+        done();
+    });
+})
 });
+
+
