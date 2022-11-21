@@ -95,5 +95,31 @@ const controller = {
       });
     }
   },
+  readOne: async (req, res) => {
+    let id = req.params.id;
+    try {
+      let itinerary = await Itinerary.findOne({ _id: id }).populate({
+        path: "userId",
+        select: "name photo -_id",
+      });
+      if (itinerary) {
+        res.status(200).json({
+          success: true,
+          message: "the itinerary was successfully found",
+          response: itinerary,
+        });
+      } else {
+        res.status(404).json({
+          success: false,
+          message: "there is no itinerary",
+        });
+      }
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  },
 };
 module.exports = controller;
