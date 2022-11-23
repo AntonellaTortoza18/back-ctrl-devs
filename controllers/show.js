@@ -3,6 +3,10 @@ const Show = require("../models/Show.js");
 const controller = {
   read: async (req, res) => {
     let query = {};
+    if(req.query.userId){
+      query ={userId: req.query.userId}
+    }
+
     if (req.query.hotelId) {
       query = {
         hotelId: req.query.hotelId,
@@ -10,6 +14,7 @@ const controller = {
     }
     try {
       let show = await Show.find(query);
+      
       if (show) {
         res.status(200).json({
           success: true,
@@ -92,5 +97,35 @@ const controller = {
       });
     }
   },
+
+  
+  readOne: async (req, res) => {
+    let id = req.params.id;
+    try {
+      let show = await Show.findOne({ _id: id }).populate({
+        path: "userId",
+        select: "name photo -_id",
+      });
+      if (show) {
+        res.status(200).json({
+          success: true,
+          message: "the show was successfully found",
+          response: show,
+        });
+      } else {
+        res.status(404).json({
+          success: false,
+          message: "there is no show",
+        });
+      }
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  },
+
+  
 };
 module.exports = controller;

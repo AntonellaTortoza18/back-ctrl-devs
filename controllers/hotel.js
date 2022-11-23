@@ -5,7 +5,7 @@ const controller = {
     try {
       let new_hotel = await Hotel.create(req.body);
       res.status(201).json({
-        id: new_hotel._id,
+        response: new_hotel,
         success: true,
         message: "the hotel was successfully created",
       });
@@ -45,6 +45,9 @@ const controller = {
   read: async (req, res) => {
     let query = {};
     let order = {};
+    if(req.query.userId){
+      query ={userId: req.query.userId}
+    }
 
     if (req.query.name) {
       query = {
@@ -60,7 +63,10 @@ const controller = {
     }
 
     try {
-      let all_hotels = await Hotel.find(query).sort(order);
+      let all_hotels = await Hotel.find(query).sort(order).populate({
+        path: "userId",
+        select: "role -_id",
+      });
       if (all_hotels) {
         res.status(200).json({
           success: true,
@@ -94,13 +100,13 @@ const controller = {
           response: hotel,
         });
       } else {
-        res.status(404).json({
+        res.status(400).json({
           success: false,
           message: "there are no Hotels",
         });
       }
     } catch (error) {
-      res.status(400).json({
+      res.status(404).json({
         success: false,
         message: error.message,
       });
@@ -131,5 +137,6 @@ const controller = {
       });
     }
   },
+  
 };
 module.exports = controller;
