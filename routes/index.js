@@ -10,7 +10,7 @@ let show = require("./show")
 // ubi de las rutas de curso.
 
 // le obligo al enrutador principal que use la palabra user para poder controlar las rutas de user.
-router.use('/api/users', user)
+router.use('/api/auth', user)
 router.use('/api/cities', city)
 
 router.use('/api/itineraries', itinerary)
