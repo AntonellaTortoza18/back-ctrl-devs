@@ -17,12 +17,12 @@ passport.use(
                 if (user) {
                     user = { //este es el objeto user que se "inyecta" al req
                         //aqui es donde protejo los datos del usuario
-                       /*  id: user._id, */
+                         id: user._id,
                         name: user.name,
                         mail: user.mail,
                         role: user.role, 
                         photo: user.photo
-                        // preguntar si se proteje la contraseña
+                        
                     }
                     return done(null, user)
                 } else {

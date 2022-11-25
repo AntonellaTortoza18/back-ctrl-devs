@@ -9,11 +9,11 @@ const {
   invalidCredentialsResponse,
   userSignedOutResponse,
 } = require("../config/responses");
- const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 const controller = {
   register: async (req, res, next) => {
-    let { name, lastName,  role ,photo, age, mail, password} = req.body;
+    let { name, lastName, role, photo, age, mail, password } = req.body;
     let verified = false;
     let logged = false;
     let code = crypto.randomBytes(10).toString("hex");
@@ -47,7 +47,7 @@ const controller = {
     //requiere por params el código a verificar
 
     const { code } = req.params;
-    console.log(code);
+
     try {
       //busca un usuario que coincida el código
       //y cambia verificado de false a true
@@ -69,73 +69,75 @@ const controller = {
   },
 
   enter: async (req, res, next) => {
-   const { password } = req.body; 
-   const { user } = req;
-   try {
-     const verifiedPassword = bcryptjs.compareSync(password, user.password);
+    const { password } = req.body;
+    const { user } = req;
+    try {
+      const verifiedPassword = bcryptjs.compareSync(password, user.password);
 
-    if (verifiedPassword) {
-     const userDb = await User.findOneAndUpdate(
-        { _id: user.id },
-        { logged: true },
+      if (verifiedPassword) {
+        const userDb = await User.findOneAndUpdate(
+          { _id: user.id },
+          { logged: true },
           { new: true }
         );
+        let userProctected = {
+          id: userDb._id,
+          name: userDb.name,
+          photo: userDb.photo,
+          logged: userDb.logged,
+        }
         const token = jwt.sign(
-          {
-            id: userDb._id,
-            name: userDb.name,
-            lastName: userDb.lastName,
-            role: userDb.role,
-            photo: userDb.photo,
-            logged: userDb.logged,
-          },
+          userProctected,
           process.env.KEY_JWT,
           { expiresIn: 60 * 60 * 24 }
-       );
+        );
 
-       return res.status(200).json({
-          response: { user , token },
+        return res.status(200).json({
+          response: { user:{name:user.name, lastname:user.lastName, photo:user.photo, role: user.role, id: user.id}, token },
           success: true,
-           message: "Welcome " + user.name,
-         });
-       }
+          message: "Welcome " + user.name,
+        });
+      }
 
-     return invalidCredentialsResponse(req, res);
-   } catch (error) {
-     next(error);
-   }
- },
-
-   enterWithToken: async (req, res, next) => {
-    let { user } = req;
-    try {
-      return res.json({
-         response: {
-         user
-        },
-        success: true,
-       message: "Welcome " + user.name,
-     });
-     } catch (error) {
-       next(error);
+      return invalidCredentialsResponse(req, res);
+    } catch (error) {
+      next(error);
     }
   },
 
-  // leave: async (req, res, next) => {
-  //   //método para que un usuario cierre sesión (cambia online de true a false)
-  //   //solo para usuarios registrados en nuestra app (social logout se maneja en front)
-  //   //si tiene éxito debe cambiar online de true a false
-  //   //si no tiene éxito debe responder con el error
-  //   const { id } = req.user;
+  enterWithToken: async (req, res, next) => {
+    let { user } = req;
+    try {
+      return res.json({
+        response: {
+          user,
+        },
+        success: true,
+        message: "Welcome " + user.name,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
 
-  //   try {
-  //     await User.findOneAndUpdate({ _id: id }, { online: false });
+  leave: async (req, res, next) => {
+    //método para que un usuario cierre sesión (cambia online de true a false)
+    //si tiene éxito debe cambiar online de true a false
+    //si no tiene éxito debe responder con el error
+    const { id } = req.user;
 
-  //     return userSignedOutResponse(req, res);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // },
+    try {
+    let user =   await User.findOneAndUpdate(
+        { _id: id },
+        { logged: false },
+        { new: true }
+      );
+      console.log(user)
+      return userSignedOutResponse(req, res);
+    } catch (error) {
+      next(error);
+    }
+  },
   // read: async (req, res, next) => {
   //   let query = {};
   //   let order = { name: "asc" };
