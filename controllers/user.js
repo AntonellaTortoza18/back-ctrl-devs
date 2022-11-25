@@ -13,11 +13,7 @@ const {
 
 const controller = {
   register: async (req, res, next) => {
-    //método para que un usuario se registre
-    //luego de pasar por todas las validaciones:
-    //desestructura el cuerpo
     let { name, lastName,  role ,photo, age, mail, password} = req.body;
-    //define las propiedades "extras" que necesite (online, codigo y verificado)
     let verified = false;
     let logged = false;
     let code = crypto.randomBytes(10).toString("hex");
@@ -88,7 +84,9 @@ const controller = {
           {
             id: userDb._id,
             name: userDb.name,
-             photo: userDb.photo,
+            lastName: userDb.lastName,
+            role: userDb.role,
+            photo: userDb.photo,
             logged: userDb.logged,
           },
           process.env.KEY_JWT,
@@ -96,7 +94,7 @@ const controller = {
        );
 
        return res.status(200).json({
-          response: { user: {name: user.name, lastName: user.lastName, photo: user.photo, role: user.role, logged: user.logged} , token },
+          response: { user , token },
           success: true,
            message: "Welcome " + user.name,
          });
@@ -113,10 +111,7 @@ const controller = {
     try {
       return res.json({
          response: {
-         user: {
-             name: user.name,
-             photo: user.photo,
-         },
+         user
         },
         success: true,
        message: "Welcome " + user.name,

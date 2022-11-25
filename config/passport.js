@@ -19,11 +19,10 @@ passport.use(
                         //aqui es donde protejo los datos del usuario
                        /*  id: user._id, */
                         name: user.name,
-                       /*  lastName: user.lastName, */
-                       /* age: user.age, */
                         mail: user.mail,
-                        /* role: user.role, */
+                        role: user.role, 
                         photo: user.photo
+                        // preguntar si se proteje la contraseña
                     }
                     return done(null, user)
                 } else {
