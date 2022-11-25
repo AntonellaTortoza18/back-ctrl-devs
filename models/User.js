@@ -11,7 +11,7 @@ const schema = new mongoose.Schema({
     // confirmPassword: {type: String,required: true},
     code: {type: String,required: true},
     verified: {type: Boolean},
-    online: {type: Boolean}
+    logged: {type: Boolean}
 });
 
 
