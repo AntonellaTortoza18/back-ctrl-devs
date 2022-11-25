@@ -9,7 +9,7 @@ const {
   invalidCredentialsResponse,
   userSignedOutResponse,
 } = require("../config/responses");
-// const jwt = require("jsonwebtoken");
+ const jwt = require("jsonwebtoken");
 
 const controller = {
   register: async (req, res, next) => {
@@ -19,7 +19,7 @@ const controller = {
     let { name, lastName,  role ,photo, age, mail, password} = req.body;
     //define las propiedades "extras" que necesite (online, codigo y verificado)
     let verified = false;
-    let online = false;
+    let logged = false;
     let code = crypto.randomBytes(10).toString("hex");
     //encripto o hasheo la contraseña
     password = bcryptjs.hashSync(password, 10);
@@ -35,7 +35,7 @@ const controller = {
         mail,
         password,
         verified,
-        online,
+        logged,
         code,
       });
       //envía mail de verificación (con transportador)
@@ -72,71 +72,59 @@ const controller = {
     }
   },
 
-  // enter: async (req, res, next) => {
-  //   const { password } = req.body;
-  //   const { user } = req;
+  enter: async (req, res, next) => {
+   const { password } = req.body; 
+   const { user } = req;
+   try {
+     const verifiedPassword = bcryptjs.compareSync(password, user.password);
 
-  //   //método para que un usuario inicie sesión
-  //   //luego de pasar por todas las validaciones:
-  //   //desestructura la contraseña y el objeto user que vienen en el req
-  //   //compara las contraseñas
-  //   //si tiene éxito debe generar y retornar un token y debe redirigir a alguna página (home, welcome)
-  //   //además debe cambiar online de false a true
-  //   //si no tiene éxito debe responder con el error
-  //   try {
-  //     const verifiedPassword = bcryptjs.compareSync(password, user.password);
+    if (verifiedPassword) {
+     const userDb = await User.findOneAndUpdate(
+        { _id: user.id },
+        { logged: true },
+          { new: true }
+        );
+        const token = jwt.sign(
+          {
+            id: userDb._id,
+            name: userDb.name,
+             photo: userDb.photo,
+            logged: userDb.logged,
+          },
+          process.env.KEY_JWT,
+          { expiresIn: 60 * 60 * 24 }
+       );
 
-  //     if (verifiedPassword) {
-  //       const userDb = await User.findOneAndUpdate(
-  //         { _id: user.id },
-  //         { online: true },
-  //         { new: true }
-  //       );
-  //       const token = jwt.sign(
-  //         {
-  //           id: userDb._id,
-  //           name: userDb.name,
-  //           photo: userDb.photo,
-  //           online: userDb.online,
-  //         },
-  //         process.env.KEY_JWT,
-  //         { expiresIn: 60 * 60 * 24 }
-  //       );
+       return res.status(200).json({
+          response: { user: {name: user.name, lastName: user.lastName, photo: user.photo, role: user.role, logged: user.logged} , token },
+          success: true,
+           message: "Welcome " + user.name,
+         });
+       }
 
-  //       return res.status(200).json({
-  //         response: { user, token },
-  //         success: true,
-  //         message: "Welcome " + user.name,
-  //       });
-  //     }
+     return invalidCredentialsResponse(req, res);
+   } catch (error) {
+     next(error);
+   }
+ },
 
-  //     return invalidCredentialsResponse(req, res);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // },
-
-  // enterWithToken: async (req, res, next) => {
-  //   //método para que un usuario que ya inicio sesión no la pierda al recargar
-  //   //solo para usuarios registrados en nuestra app (social loguin se maneja en front)
-  //   //luego de pasar por todas las validaciones:
-  //   //debe responder con los datos del usuario
-  //   let { user } = req;
-  //   try {
-  //     return res.json({
-  //       response: {
-  //         user: {
-  //           name: user.name,
-  //           photo: user.photo,
-  //         },
-  //       },
-  //       success: true,
-  //       message: "Welcome " + user.name,
-  //     });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // },
+   enterWithToken: async (req, res, next) => {
+    let { user } = req;
+    try {
+      return res.json({
+         response: {
+         user: {
+             name: user.name,
+             photo: user.photo,
+         },
+        },
+        success: true,
+       message: "Welcome " + user.name,
+     });
+     } catch (error) {
+       next(error);
+    }
+  },
 
   // leave: async (req, res, next) => {
   //   //método para que un usuario cierre sesión (cambia online de true a false)
