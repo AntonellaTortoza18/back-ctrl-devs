@@ -47,20 +47,6 @@ function verifyResponse(req,res) {
     })
 }
 
-function mustBeTheOwner(req, res) {
-    return res.status(401).json({
-      success: false,
-      message: "You must be the owner to carry out this operation",
-    });
-  }
-
-  function documentNotFound(req, res) {
-    return res.status(404).json({
-      success: false,
-      message: "Couldn't find the document",
-    });
-  }
-
 module.exports = {
     userSignedUpResponse,
     userExistsResponse,
@@ -68,7 +54,5 @@ module.exports = {
     userSignedOutResponse,
     mustSignInResponse,
     invalidCredentialsResponse,
-    verifyResponse,
-    mustBeTheOwner,
-    documentNotFound,
+    verifyResponse
 }
