@@ -47,6 +47,13 @@ function verifyResponse(req,res) {
     })
 }
 
+function mustBeTheOwner(req, res) {
+    return res.status(401).json({
+      success: false,
+      message: "You must be the owner to carry out this operation",
+    });
+  }
+  
 module.exports = {
     userSignedUpResponse,
     userExistsResponse,
@@ -54,5 +61,7 @@ module.exports = {
     userSignedOutResponse,
     mustSignInResponse,
     invalidCredentialsResponse,
-    verifyResponse
+    verifyResponse,
+    mustBeTheOwner,
+  
 }
