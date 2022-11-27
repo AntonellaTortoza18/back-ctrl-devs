@@ -53,6 +53,13 @@ function mustBeTheOwner(req, res) {
       message: "You must be the owner to carry out this operation",
     });
   }
+
+  function activityNotFound(req, res) {
+    return res.status(404).json({
+      success: false,
+      message: "Couldn't find the document",
+    });
+  }
   
   
   
@@ -65,5 +72,6 @@ module.exports = {
     invalidCredentialsResponse,
     verifyResponse,
     mustBeTheOwner,
+    activityNotFound
   
 }

@@ -5,6 +5,8 @@ let {read, create, update, destroy, readOne} = require("../controllers/itinerary
 const passport = require('../config/passport')
 const Itinerary = require("../models/Itinerary");
 const isTheSameUser = require('../middlewares/isTheSameUser')
+
+
 router.get("/",read)
 router.post("/", passport.authenticate("jwt", { session: false }), validator(schema), create);
 router.put("/:id", passport.authenticate("jwt", { session: false }), isTheSameUser(Itinerary), update);
