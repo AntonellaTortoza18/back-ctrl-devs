@@ -1,10 +1,9 @@
 // importar chai
-const app = require("../app");
+ const app = require("../app");
 const chai = require("chai");
 const assert = chai.assert;
 const request = require("supertest");
 const { auth } = require("googleapis/build/src/apis/abusiveexperiencereport");
-
 
 describe("GET /api/cities", function () {
   let token =
@@ -79,6 +78,7 @@ describe("POST /cities", function () {
         done();
       });
   });
+}); 
 });
 describe("DELETE /api/cities/:id", function () {
   let token =
