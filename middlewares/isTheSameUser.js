@@ -1,7 +1,4 @@
-
 const { mustBeTheOwner, activityNotFound} = require("../config/responses");
-
-
 
 const isTheSameUser = model => [
   async (req, res, next) => {
