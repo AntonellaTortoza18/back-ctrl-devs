@@ -174,6 +174,7 @@ const controller = {
       });
       if (one) {
         res.status(200).json({
+          data: one,
           id: one._id,
           success: true,
           message: "The user was successfully modified",
