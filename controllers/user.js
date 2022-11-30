@@ -87,7 +87,7 @@ const controller = {
           logged: userDb.logged,
         };
         const token = jwt.sign(userProctected, process.env.KEY_JWT, {
-          expiresIn: 60 * 60 * 24,
+          expiresIn: 60 * 60 * 24 ,
         });
 
         return res.status(200).json({
