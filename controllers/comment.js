@@ -54,6 +54,7 @@ const controller = {
       res.status(500).json();
     }
   },
+  
   update: async (req, res) => {
     let { id } = req.params;
     try {
@@ -79,6 +80,7 @@ const controller = {
       });
     }
   },
+
   destroy: async (req, res) => {
     let {id} = req.params
     try {

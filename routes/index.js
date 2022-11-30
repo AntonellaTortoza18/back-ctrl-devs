@@ -20,7 +20,6 @@ router.use('/api/itineraries', itinerary)
 router.use('/api/hotels', hotel)
 router.use('/api/shows', show)
 
-
 router.use('/api/comments', comment)
 
 
