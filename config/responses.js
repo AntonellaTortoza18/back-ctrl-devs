@@ -57,7 +57,7 @@ function mustBeTheOwner(req, res) {
   function activityNotFound(req, res) {
     return res.status(404).json({
       success: false,
-      message: "Couldn't find the document",
+      message: "Couldn't find the activity",
     });
   }
   

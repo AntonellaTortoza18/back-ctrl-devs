@@ -79,7 +79,7 @@ describe("POST /cities", function () {
       });
   });
 }); 
-});
+
 describe("DELETE /api/cities/:id", function () {
   let token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODEwMjQwODA2YjgzYjMyMjk5Mzk0NiIsIm5hbWUiOiJNZXNzaSIsInBob3RvIjoiaHR0cHM6Ly9wYnMudHdpbWcuY29tL21lZGlhL0UzQVgxc3FWVUFBSWk0Vi5qcGciLCJsb2dnZWQiOnRydWUsImlhdCI6MTY2OTU5NzgyMywiZXhwIjoxNjY5Njg0MjIzfQ.-JB_Dy68O0G0-atkma3AaabOgjGIZOS3kJkst0uSHsM";
