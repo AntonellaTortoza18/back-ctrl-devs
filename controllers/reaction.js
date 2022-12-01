@@ -86,6 +86,7 @@ const controller = {
     }
 
     try {
+      if(req.query.itineraryId){
         let reactions = await Reaction.find(query).populate({
           path: "userId",
           select: "name lastName photo ",
@@ -111,7 +112,32 @@ const controller = {
             data: [],
           });
         }
-     
+      }else{
+        let reactions = await Reaction.find(query).populate({
+          path:"itineraryId", select:"photo -_id name"
+        })
+        if (reactions.length > 0) {
+          let lengthOfReactions = {};
+          reactions.forEach(
+            (reaction) =>
+              (lengthOfReactions[reaction.name] = reaction.userId.length)
+          );
+
+          res.status(200).json({
+            lengthOfReactions,
+            id: req.query.itineraryId,
+            data: reactions,
+            success: true,
+            message: `There are the reactions`,
+          });
+        } else {
+          res.status(404).json({
+            success: false,
+            message: "No reactions found",
+            data: [],
+          });
+        }
+      }
     } catch (error) {
       res.status(400).json({
         success: false,
@@ -120,6 +146,25 @@ const controller = {
       });
     }
   },
+
+
+  deleteReactionOfaUser: async (req, res) => {
+    let { id } = req.params
+
+    try {
+      let response =  await Reaction.findOneAndUpdate({ _id: id }, { $pull: { userId: req.user.id } }, { new: true })
+        res.status(200).json({
+            message: `reaction deleted`,
+            success: true,
+            response
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: error.message,
+            success: false
+        })
+    }
+},
 
   
 };
