@@ -44,9 +44,10 @@ const controller = {
     }
 
     try {
-      comments = await Comment.find(query).sort({ date: "desc" }).populate("userId", {
+      comments = await Comment.find(query).sort({ date: "asc" }).populate("userId", {
         photo: 1,
         name: 1,
+        logged: 1,
       });
       res.json({ success: true, response: comments });
     } catch (error) {
