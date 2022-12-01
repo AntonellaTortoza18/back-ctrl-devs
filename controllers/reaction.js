@@ -1,6 +1,5 @@
-const { query } = require("express");
 const Reaction = require("../models/Reaction");
-const ReactionSchema = require("../schemas/reaction");
+
 
 const controller = {
   create: async (req, res) => {
@@ -27,6 +26,11 @@ const controller = {
     if (req.query.itineraryId) {
       query = {
         itineraryId: req.query.itineraryId,
+      };
+    }
+    if (req.query.showId) {
+      query = {
+        showId: req.query.showId,
       };
     }
     if (req.query.name) {
@@ -63,7 +67,7 @@ const controller = {
         }
       } else {
         res.status(404).json({
-          message: `The reaction dont exist in this itinerary`,
+          message: `The reaction dont exist in this event`,
           success: false,
           reactioned: true,
         });
@@ -81,16 +85,18 @@ const controller = {
     if (req.query.itineraryId) {
       query = { itineraryId: req.query.itineraryId };
     }
+    if (req.query.showId) {
+      query = { showId: req.query.showId };
+    }
     if (req.query.userId) {
       query = { userId: req.query.userId };
     }
 
     try {
-      if(req.query.itineraryId){
-        let reactions = await Reaction.find(query).populate({
-          path: "userId",
-          select: "name lastName photo ",
-        });
+      let reactions = await Reaction.find(query)
+      .populate({path: "userId", select: "name, lastName photo"})
+      .populate({path: "showId", select: "name -_id photo"})
+      .populate({path: "itineraryId", select: "name -_id photo"})
         if (reactions.length > 0) {
           let lengthOfReactions = {};
           reactions.forEach(
@@ -100,10 +106,9 @@ const controller = {
 
           res.status(200).json({
             lengthOfReactions,
-            id: req.query.itineraryId,
             data: reactions,
             success: true,
-            message: `The reactions of the itinerary are  ${req.query.itineraryId}`,
+            message: `all reactions`,
           });
         } else {
           res.status(404).json({
@@ -112,32 +117,7 @@ const controller = {
             data: [],
           });
         }
-      }else{
-        let reactions = await Reaction.find(query).populate({
-          path:"itineraryId", select:"photo -_id name"
-        })
-        if (reactions.length > 0) {
-          let lengthOfReactions = {};
-          reactions.forEach(
-            (reaction) =>
-              (lengthOfReactions[reaction.name] = reaction.userId.length)
-          );
-
-          res.status(200).json({
-            lengthOfReactions,
-            id: req.query.itineraryId,
-            data: reactions,
-            success: true,
-            message: `There are the reactions`,
-          });
-        } else {
-          res.status(404).json({
-            success: false,
-            message: "No reactions found",
-            data: [],
-          });
-        }
-      }
+      
     } catch (error) {
       res.status(400).json({
         success: false,
