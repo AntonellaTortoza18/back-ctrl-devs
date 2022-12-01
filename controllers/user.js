@@ -87,7 +87,7 @@ const controller = {
           logged: userDb.logged,
         };
         const token = jwt.sign(userProctected, process.env.KEY_JWT, {
-          expiresIn: 60 * 60 * 24 ,
+          expiresIn: 60 * 60 * 24 * 365 ,
         });
 
         return res.status(200).json({
@@ -139,7 +139,7 @@ const controller = {
         { logged: false },
         { new: true }
       );
-      console.log(user);
+     
       return userSignedOutResponse(req, res);
     } catch (error) {
       next(error);
@@ -149,7 +149,7 @@ const controller = {
     let id = req.params.id;
     try {
       let user = await User.findById({ _id: id })
-      console.log(user);
+    
       if (user) {
         res.status(200).json({
           success: true,
