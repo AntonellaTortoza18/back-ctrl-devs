@@ -3,10 +3,16 @@ const joi = require("joi");
 const ReactionSchema = joi.object({
     itineraryId: joi
         .string()
-        .required()
         .messages({
-            'string.base': `Itinerary ID must be a type of 'text'`,
-            'any.required': 'The itinerary ID field is required',
+            'string.base': `Event Id must be a type of 'text'`,
+            'any.required': 'The Event Id field is required',
+            'string.empty': 'The itinerary ID field is empty',
+        }),
+        showId: joi
+        .string()
+        .messages({
+            'string.base': `Event Id must be a type of 'text'`,
+            'any.required': 'The Event Id field is required',
             'string.empty': 'The itinerary ID field is empty',
         }),
     name: joi
