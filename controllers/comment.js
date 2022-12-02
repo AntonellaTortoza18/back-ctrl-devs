@@ -37,6 +37,10 @@ const controller = {
     if (req.query.showId) {
       query = { showId: req.query.showId };
     }
+    if (req.query.itineraryId) {
+      query = { itineraryId: req.query.itineraryId };
+    }
+
     if (req.query.order) {
       order = {
         date: req.query.order,
