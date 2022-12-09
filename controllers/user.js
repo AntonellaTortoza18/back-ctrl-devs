@@ -168,6 +168,11 @@ const controller = {
   },
   update: async (req, res) => {
     let { id } = req.params;
+    if (req.body.password) {
+      let { password } = req.body;
+      password = bcryptjs.hashSync(password, 10);
+      req.body.password = password;
+  }
     try {
       let one = await User.findOneAndUpdate({ _id: id }, req.body, {
         new: true,
